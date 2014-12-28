@@ -34,14 +34,21 @@ function initialize() {
   map.data.setStyle(featureStyle);
   // [END snippet-style]
   
-  function allThings(f) {
-    alert(f);
-  }
-  
   console.log(map.data.getStyle());
   
-  map.data.forEach(allThings);
+  // JS is asynchronous
+  setTimeout(function() {
+   map.data.forEach(function(el) {
+     el.forEachProperty(function(p, q) {
+       console.log(p + " " + q);
+     }
+                       )
+   }
+)
+  console.log(map.data.getFeatureById("test"));
+    }, 500);
 }
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
